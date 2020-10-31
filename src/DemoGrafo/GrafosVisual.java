@@ -28,6 +28,8 @@ public class GrafosVisual extends javax.swing.JFrame {
 
     ArrayList<Integer> posx = new ArrayList<>();
     ArrayList<Integer> posy = new ArrayList<>();
+    int c = 0;
+    int linea1x, linea1y, linea2x, linea2y;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,48 +116,50 @@ public class GrafosVisual extends javax.swing.JFrame {
         if (jRadioButton2.isSelected()) {
             System.out.println("Creando vectores");
             int maxx, minx, maxy, miny;
-            int linea1x, linea1y, linea2x, linea2y;
 
             //Obtiene la posicion del mouse al hacer click
             Point cord = MouseInfo.getPointerInfo().getLocation();
             int cord_x = cord.x;
             int cord_y = cord.y;
-
+            System.out.println(cord);
             //Crea el area del ciruclo y la compara con las areas de todos los ciruclos
             for (int i = 0; i < posx.size(); i++) {
                 maxx = posx.get(i) + 25;
                 minx = posx.get(i) - 25;
                 maxy = posy.get(i) + 25;
                 miny = posy.get(i) - 25;
-                if (cord_x < maxx && cord_x > minx) {
-                    if (cord_y < maxy && cord_y > miny) {
-                        linea1x = cord.x;
-                        linea1y = cord.y;
-                        System.out.println(linea1x + " " + linea1y);
-                        Point cord2 = MouseInfo.getPointerInfo().getLocation();
-                        System.out.println(cord2);
-                        //JOptionPane.showMessageDialog(this, "Nodo 1 seleccionado");
-                        System.out.println("cordenada 1 " + cord);
-                        for (int j = 0; j < posx.size(); j++) {
-
+                switch (c) {
+                    case 0:
+                        if (cord_x < maxx && cord_x > minx) {
+                            if (cord_y < maxy && cord_y > miny) {
+                                linea1x = cord.x;
+                                linea1y = cord.y;
+                                System.out.println(linea1x + " " + linea1y);
+                                c = 1;
+                                JOptionPane.showMessageDialog(this, "Nodo 1 seleccionado");
+                                break;
+                            }
                         }
-//                        for (int j = 0; j < posx.size(); j++) {
-//                            maxx = posx.get(j) + 25;
-//                            minx = posx.get(j) - 25;
-//                            maxy = posy.get(j) + 25;
-//                            miny = posy.get(j) - 25;
-//                            if (cord_x < maxx && cord_x > minx) {
-//                                if (cord_y < maxy && cord_y > miny) {
-//                                    System.out.println("Nodo 2 seleccionado");
-//                                    m.linea(this.getGraphics(), linea1x, linea1y, 100, 100);
-//                                }
-//                            }
-//                        }
-                    }
+                    case 1:
+                        if (cord_x < maxx && cord_x > minx) {
+                            if (cord_y < maxy && cord_y > miny) {
+                                linea2x = cord.x;
+                                linea2y = cord.y;
+                                System.out.println(linea2x + " " + linea2y);
+                                JOptionPane.showMessageDialog(this, "Nodo 2 seleccionado");
+
+                                m.linea(this.getGraphics(), linea1x, linea1y, linea2x, linea2y);
+                                c = 0;
+
+                                break;
+                            }
+                        }
                 }
             }
+        }
+
     }//GEN-LAST:event_CrearLineaClick
-    }
+
     private void CalcularGasto(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalcularGasto
         // TODO add your handling code here:
         if (jRadioButton3.isSelected()) {
@@ -177,16 +181,24 @@ public class GrafosVisual extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GrafosVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrafosVisual.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GrafosVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrafosVisual.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GrafosVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrafosVisual.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GrafosVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrafosVisual.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

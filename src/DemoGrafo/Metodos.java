@@ -22,5 +22,6 @@ public class Metodos extends Canvas {
     }
 
     public void linea(Graphics g, int x, int y, int x2, int y2) {
+        g.drawLine(x, y, x2, y2);
     }
 }
